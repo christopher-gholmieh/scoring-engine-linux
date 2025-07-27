@@ -100,7 +100,7 @@ static void prepare_image(const std::string &main_user) {
 static void clean_image() {
     // Variables (Assignment):
     // Responses:
-    std::vector<const std::string> responses = {
+    std::vector<std::string> responses = {
         "yes", "YES", "ye", "YE", "y", "Y"
     };
 
