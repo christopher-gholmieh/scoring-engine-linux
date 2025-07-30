@@ -165,7 +165,6 @@ static void service_construction_validation(const YAML::Node &node) {
 static std::unique_ptr<Service> construct_service_from_node(const YAML::Node &node, const int points, const std::string& type, bool autogenerate_description) {
     // Validation:
     service_construction_validation(node);
-	node.Tag().at1
 
     // Variables (Assignment):
     // Service:
