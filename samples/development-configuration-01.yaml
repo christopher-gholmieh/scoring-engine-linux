@@ -149,6 +149,31 @@ vulnerabilities:
         # Points:
         points: 10
 
+    # Permissions:
+    - vulnerability:
+        # Type:
+        type: "PermissionNot"
+
+        # Path:
+        path: "/home/christopherg/test.txt"
+
+        # Permissions:
+        permission: "0644"
+
+        # Points:
+        points: 30
+
+    - vulnerability:
+        # Type:
+        type: "FileExistsNot"
+
+        # Path:
+        path: "/home/christopherg/test2.txt"
+
+        # Points:
+        points: 20
+
+
 # Penalties:
 penalties:
     - penalty:

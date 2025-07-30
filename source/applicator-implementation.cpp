@@ -3,11 +3,14 @@
 
 // Implementations:
 #include "vulnerabilities/configuration-implementation.hpp"
+#include "vulnerabilities/permission-implementation.hpp"
 #include "vulnerabilities/forensics-implementation.hpp"
 #include "vulnerabilities/package-implementation.hpp"
 #include "vulnerabilities/service-implementation.hpp"
 #include "vulnerabilities/group-implementation.hpp"
 #include "vulnerabilities/user-implementation.hpp"
+#include "vulnerabilities/file-implementation.hpp"
+
 #include "vulnerability-implementation.hpp"
 
 #include "applicator-implementation.hpp"
@@ -244,6 +247,17 @@ static void apply_user(const std::string &user, const user_behavior_t user_behav
     }
 }
 
+static void apply_permission(const std::string &path, const std::string &permissions) {
+	// Variables (Assignment):
+	// Command:
+	const std::string command = "chmod " + permissions + " " + path;
+
+	// Logic:
+	if (system(command.c_str()) != 0) {
+		std::cout << "[!] Failed to apply permission " + permissions + " to " + path + "!" << std::endl;
+	}
+}
+
 static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vector) {
     for (const auto &vulnerability: vector) {
         // Forensics:
@@ -295,8 +309,22 @@ static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vecto
             (void) configuration_vulnerability;
 
             // Log:
-            std::cout << "[!] Currently there is no support for configuration vulnerabilities in the applicator!" << std::endl;
-        }
+            std::cout << "[!] Currently there is no support for configuration vulnerabilities in the applicator! Please configure them yourself!" << std::endl;
+        } else if (auto permission_vulnerability = dynamic_cast<Permission*>(vulnerability.get())) {
+			apply_permission(
+				/* Path: */
+				permission_vulnerability->get_path(),
+
+				/* Permissions: */
+				permission_vulnerability->get_permissions()
+			);
+		} else if (auto file_vulnerability = dynamic_cast<File*>(vulnerability.get())) {
+			// Compiler:
+            (void) file_vulnerability;
+
+            // Log:
+            std::cout << "[!] Currently there is no support for file vulnerabilities in the applicator! Please configure them yourself!" << std::endl;		
+		}
     }
 }
 

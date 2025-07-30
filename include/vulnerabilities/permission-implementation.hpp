@@ -20,6 +20,16 @@ class Permission : public Vulnerability {
         /* Evaluate: */
         void evaluate() override;
 
+		/* Path: */
+		std::string get_path() const {
+			return this->path;
+		}
+
+		/* Permissions: */
+		std::string get_permissions() const {
+			return this->permissions;
+		}
+
     private:
         /* Path: */
         const std::string path;

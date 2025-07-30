@@ -8,6 +8,7 @@
 #include "filesystem-utilities.hpp"
 
 // Core:
+#include <iostream>
 #include <string>
 
 
@@ -25,10 +26,10 @@ void Permission::evaluate() {
     }
 
     // Permission:
-    const std::string permission = file_permission(this->path);
+    const std::string permission_bits = file_permission(this->path);
 
     // Match:
-    const bool match = (permissions == this->permissions);
+    const bool match = permission_bits == this->permissions;
 
     // Logic:
     if (match == false && this->remediated == false) {

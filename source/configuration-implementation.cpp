@@ -3,13 +3,15 @@
 
 // Implementations:
 #include "vulnerabilities/configuration-implementation.hpp"
+#include "vulnerabilities/permission-implementation.hpp"
 #include "vulnerabilities/forensics-implementation.hpp"
 #include "vulnerabilities/package-implementation.hpp"
 #include "vulnerabilities/service-implementation.hpp"
 #include "vulnerabilities/group-implementation.hpp"
 #include "vulnerabilities/user-implementation.hpp"
-#include "vulnerability-implementation.hpp"
+#include "vulnerabilities/file-implementation.hpp"
 
+#include "vulnerability-implementation.hpp"
 #include "configuration-implementation.hpp"
 
 // Core:
@@ -90,7 +92,7 @@ static std::unique_ptr<Forensics> construct_forensics_from_node(const YAML::Node
 
     // Variables (Assignment):
     // Description:
-    std::string description = "Forensics #" + std::to_string(node["number"].as<int>()) + " solved - " + std::to_string(points);
+    std::string description = combine_description("Forensics #" + std::to_string(node["number"].as<int>()) + " solved", points);
 
     if (autogenerate_description == false) {
         description = combine_description(node["description"].as<std::string>(), points);
@@ -133,7 +135,7 @@ static std::unique_ptr<Package> construct_package_from_node(const YAML::Node &no
     std::string description;
 
     if (autogenerate_description) {
-        description = "Package " + package + " " + package_type_to_action.at(type) + " - " + std::to_string(points);
+        description = combine_description("Package " + package + " " + package_type_to_action.at(type), points);
     } else {
         description = combine_description(node["description"].as<std::string>(), points);
     }
@@ -172,7 +174,7 @@ static std::unique_ptr<Service> construct_service_from_node(const YAML::Node &no
     std::string description;
 
     if (autogenerate_description) {
-        description = "Service " + service + " " + service_type_to_action.at(type) + " - " + std::to_string(points);
+        description = combine_description("Service " + service + " " + service_type_to_action.at(type), points);
     } else {
         description = combine_description(node["description"].as<std::string>(), points);
     }
@@ -219,9 +221,9 @@ static std::unique_ptr<Group> construct_group_from_node(const YAML::Node &node, 
 
     if (autogenerate_description) {
         if (type == "UserInGroupNot") {
-            description = "Removed " + user + " from group " + group + " - " + std::to_string(points);
+            description = combine_description("Removed " + user + " from group " + group, points);
         } else {
-            description = "Added " + user + " to group " + group + " - " + std::to_string(points);
+            description = combine_description("Added " + user + " to group " + group, points); 
         }
     } else {
         description = combine_description(node["description"].as<std::string>(), points);
@@ -264,7 +266,7 @@ static std::unique_ptr<User> construct_user_from_node(const YAML::Node &node, co
     std::string description;
 
     if (autogenerate_description) {
-        description = std::string(type == "UserCreated" ? "Created" : "Removed") + " " + user + " - " + std::to_string(points);
+        description = combine_description(std::string(type == "UserCreated" ? "Created" : "Removed") + " " + user, points);
     } else {
         description = combine_description(node["description"].as<std::string>(), points);
     }
@@ -335,6 +337,88 @@ static std::unique_ptr<Configuration> construct_configuration_from_node(const YA
     );
 }
 
+static void permission_construction_validation(const YAML::Node &node) {
+	if (!node["permission"]) {
+		throw std::runtime_error("[!] Permission node missing a permission!");
+	}
+
+	if (!node["path"]) {
+		throw std::runtime_error("[!] Permission node missing a path!");
+	}
+}
+
+static std::unique_ptr<Permission> construct_permission_from_node(const YAML::Node &node, const int points, bool autogenerate_description) {
+	// Validation:
+	permission_construction_validation(node);
+
+	// Variables (Assignment):
+	// Permission:
+	std::string permission = node["permission"].as<std::string>();
+
+	// Path:
+	std::string path = node["path"].as<std::string>();
+
+	// Description:
+	std::string description;
+
+	if (autogenerate_description) {
+		description = combine_description("Permissions on " + path + " fixed", points);
+	} else {
+		description = combine_description(node["description"].as<std::string>(), points);
+	}
+
+	// Logic:
+	return std::make_unique<Permission>(
+		/* Path: */
+		path,
+
+		/* Description: */
+        permission,
+
+		/* Points: */
+		points,
+
+		/* Description: */
+		description
+	);
+}
+
+static void file_construction_validation(const YAML::Node &node) {
+	if (!node["path"]) {
+		throw std::runtime_error("[!] File node missing a path!");
+	}
+}
+
+static std::unique_ptr<File> construct_file_from_node(const YAML::Node &node, const int points, bool autogenerate_description) {
+	// Validation:
+	file_construction_validation(node);
+
+	// Variables (Assignment):
+	// Path:
+	std::string path = node["path"].as<std::string>();
+
+	// Description:
+	std::string description;
+
+	if (autogenerate_description) {
+		description = combine_description("Removed file " + path, points);
+	} else {
+		description = node["description"].as<std::string>();
+	}
+
+	// Logic:
+	return std::make_unique<File>(
+		/* Path: */
+		path,
+
+		/* Points: */
+		points,
+
+		/* Description: */
+		description
+	);
+}
+
 
 // Implementations:
 std::unique_ptr<Vulnerability> create_vulnerability_from_yaml(const YAML::Node &node) {
@@ -390,6 +474,16 @@ std::unique_ptr<Vulnerability> create_vulnerability_from_yaml(const YAML::Node &
     if (type == "FileContainsNot" || type == "FileContains") {
         return construct_configuration_from_node(node, points, type, autogenerate_description);
     }
+
+	// Permission:
+	if (type == "PermissionNot") {
+		return construct_permission_from_node(node, points, autogenerate_description);
+	}
+
+	// File:
+	if (type == "FileExistsNot") {
+		return construct_file_from_node(node, points, autogenerate_description);
+	}
 
     // Error:
     throw std::runtime_error("[!] Type '" + type + "' is not a valid type! Check documentation for valid types!");

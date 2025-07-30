@@ -4,7 +4,7 @@
 #define __ENGINE_IMPLEMENTATION_HPP__
 
 // Constants:
-constexpr int SCOREBOARD_PORT = 8080;
+constexpr int SCOREBOARD_PORT = 8081;
 constexpr int ENGINE_INTERVAL = 5;
 
 // Headers:
