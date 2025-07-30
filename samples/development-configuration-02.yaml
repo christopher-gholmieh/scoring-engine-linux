@@ -1,0 +1,367 @@
+# Written by: Christopher Gholmieh
+# Image:
+image:
+  # Title:
+  title: "Jingleheimer"
+
+  # User:
+  user: "tomodell"
+
+
+# Vulnerabilities:
+vulnerabilities:
+  # Forensics:
+  - vulnerability:
+      # Type:
+      type: "Forensics"
+
+      # Question:
+      question: "A malicious package was installed on the computer. What is the name of this package?"
+
+      # Answer:
+      answer: "john"
+
+      # Path:
+      path: "/home/tomodell/Desktop/Forensics-1.txt"
+
+      # Points:
+      points: 5
+
+      # Number:
+      number: "1"
+
+  - vulnerability:
+      # Type:
+      type: "Forensics"
+
+      # Question:
+      question: "A configuration file has the permissions 666, what is the absolute path to the file?"
+
+      # Answer:
+      answer: "/etc/ssh/sshd_config"
+
+      # Path:
+      path: "/home/tomodell/Desktop/Forensics-2.txt"
+
+      # Points:
+      points: 5
+
+      # Number:
+      number: "2"
+
+  - vulnerability:
+      # Type:
+      type: "Forensics"
+
+      # Question:
+      question: "What is the default port for SSH?"
+
+      # Answer:
+      answer: "22"
+
+      # Path:
+      path: "/home/tomodell/Desktop/Forensics-3.txt"
+
+      # Points:
+      points: 5
+
+      # Number:
+      number: "3"
+
+  - vulnerability:
+      # Type:
+      type: "Forensics"
+
+      # Question:
+      question: "What is the GID of tomodell?"
+
+      # Answer:
+      answer: "1000"
+
+      # Path:
+      path: "/home/tomodell/Desktop/Forensics-4.txt"
+
+      # Points:
+      points: 5
+
+      # Number:
+      number: "4"
+
+  # Services:
+  - vulnerability:
+      # Type:
+      type: "ServiceEnabled"
+
+      # Service:
+      service: "ufw"
+
+      # Points:
+      points: 5
+
+  - vulnerability:
+      # Type:
+      type: "ServiceDisabled"
+
+      # Service:
+      service: "nginx"
+
+      # Points:
+      points: 5
+
+  - vulnerability:
+      # Type:
+      type: "ServiceEnabled"
+
+      # Service:
+      service: "ssh"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "Critical service SSHD enabled"
+
+  # Configurations:
+  - vulnerability:
+      # Type:
+      type: "FileContainsNot"
+
+      # Path:
+      path: "/etc/ssh/sshd_config"
+
+      # Text:
+      text: "PermitRootLogin yes"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "Logging in as root disabled (SSHD)"
+
+  - vulnerability:
+      # Type:
+      type: "FileContainsNot"
+
+      # Path:
+      path: "/etc/ssh/sshd_config"
+
+      # Text:
+      text: "AllowTcpForwarding yes"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "TCP forwarding disabled (SSHD)"
+
+  - vulnerability:
+      # Type:
+      type: "FileContainsNot"
+
+      # Path:
+      path: "/etc/ssh/sshd_config"
+
+      # Text:
+      text: "UsePAM no"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "SSHD uses PAM for password authentication"
+
+  - vulnerability:
+      # Type:
+      type: "FileContainsNot"
+
+      # Path:
+      path: "/etc/ssh/sshd_config"
+
+      # Text:
+      text: "PermitEmptyPasswords yes"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "Empty passwords no longer permitted (SSHD)"
+
+  # Media:
+  - vulnerability:
+      # Type:
+      type: "FileExistsNot"
+
+      # Path:
+      path: "/etc/passwords.txt"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "Removed plaintext password file"
+
+  # Permission:
+  - vulnerability:
+      # Type:
+      type: "PermissionNot"
+
+      # Permission:
+      permission: "0666"
+
+      # Path:
+      path: "/etc/ssh/sshd_config"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "/etc/ssh/sshd_config is no longer world readable"
+
+  # Packages:
+  - vulnerability:
+      # Type:
+      type: "PackageRemoved"
+
+      # Package:
+      package: "john"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "Malicious package john (password cracker) removed"
+
+  # Users:
+  - vulnerability:
+      # Type:
+      type: "UserCreated"
+
+      # Package:
+      user: "david"
+
+      # Points:
+      points: 5
+
+      # Description:
+      description: "Created standard user david"
+
+  # Groups:
+  - vulnerability:
+      # Type:
+      type: "UserInGroupNot"
+
+      # User:
+      user: "john"
+
+      # Group:
+      group: "sudo"
+
+      # Points:
+      points: 5
+
+  - vulnerability:
+      # Type:
+      type: "UserInGroupNot"
+
+      # User:
+      user: "jacob"
+
+      # Group:
+      group: "sudo"
+
+      # Points:
+      points: 5
+
+  - vulnerability:
+      # Type:
+      type: "UserInGroupNot"
+
+      # User:
+      user: "jingleheimer"
+
+      # Group:
+      group: "sudo"
+
+      # Points:
+      points: 5
+
+  - vulnerability:
+      # Type:
+      type: "UserInGroup"
+
+      # User:
+      user: "schmidt"
+
+      # Group:
+      group: "sudo"
+
+      # Points:
+      points: 10
+
+
+# Penalties:
+penalties:
+  # Users:
+  - penalty:
+      # Type:
+      type: "UserRemoved"
+
+      # User:
+      user: "tomodell"
+
+      # Points:
+      points: 5
+
+  - penalty:
+      # Type:
+      type: "UserRemoved"
+
+      # User:
+      user: "john"
+
+      # Points:
+      points: 5
+
+  - penalty:
+      # Type:
+      type: "UserRemoved"
+
+      # User:
+      user: "jacob"
+
+      # Points:
+      points: 5
+
+  - penalty:
+      # Type:
+      type: "UserRemoved"
+
+      # User:
+      user: "jingleheimer"
+
+      # Points:
+      points: 5
+
+  - penalty:
+      # Type:
+      type: "UserRemoved"
+
+      # User:
+      user: "schmidt"
+
+      # Points:
+      points: 5
+
+  # Package:
+  - penalty:
+      # Type:
+      type: "PackageRemoved"
+
+      # Package:
+      package: "openssh-server"
+
+      # Points:
+      points: 20
+
+      # Description:
+      description: "Critical service OpenSSH-Server removed"

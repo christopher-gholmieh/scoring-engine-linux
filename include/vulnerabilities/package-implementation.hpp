@@ -41,7 +41,7 @@ class Package : public Vulnerability {
 
     private:
         /* Name: */
-        const std::string &name;
+        const std::string name;
 
         /* Behavior: */
         const package_behavior_t package_behavior;
