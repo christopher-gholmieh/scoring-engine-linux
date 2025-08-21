@@ -259,6 +259,18 @@ static void apply_permission(const std::string &path, const std::string &permiss
 }
 
 static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vector) {
+    // Variables (Assignment):
+    // Service:
+    std::vector<Service*> service_vulnerability_vector;
+
+    // Group:
+    std::vector<Group*> group_vulnerability_vector;
+
+    // User:
+    std::vector<User*> user_vulnerability_vector;
+
+	
+	// Vulnerabilities:
     for (const auto &vulnerability: vector) {
         // Forensics:
         if (auto forensics_vulnerability = dynamic_cast<Forensics*>(vulnerability.get())) {
@@ -278,32 +290,11 @@ static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vecto
                 package_vulnerability->get_package_behavior()
             );
         } else if (auto service_vulnerability = dynamic_cast<Service*>(vulnerability.get())) {
-            apply_service(
-                /* Service: */
-                service_vulnerability->get_service(),
-
-                /* Behavior: */
-                service_vulnerability->get_service_behavior()
-            );
+            service_vulnerability_vector.push_back(service_vulnerability);
         } else if (auto group_vulnerability = dynamic_cast<Group*>(vulnerability.get())) {
-            apply_group(
-                /* User: */
-                group_vulnerability->get_user(),
-
-                /* Group: */
-                group_vulnerability->get_group(),
-
-                /* Behavior: */
-                group_vulnerability->get_group_behavior()
-            );
+            group_vulnerability_vector.push_back(group_vulnerability);
         } else if (auto user_vulnerability = dynamic_cast<User*>(vulnerability.get())) {
-            apply_user(
-                /* User: */
-                user_vulnerability->get_user(),
-
-                /* Behavior: */
-                user_vulnerability->get_user_behavior()
-            );
+            user_vulnerability_vector.push_back(user_vulnerability);
         } else if (auto configuration_vulnerability = dynamic_cast<Configuration*>(vulnerability.get())) {
             // Compiler:
             (void) configuration_vulnerability;
@@ -325,6 +316,43 @@ static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vecto
             // Log:
             std::cout << "[!] Currently there is no support for file vulnerabilities in the applicator! Please configure them yourself!" << std::endl;		
 		}
+    }
+
+    
+    // Service:
+    for (Service* service_vulnerability: service_vulnerability_vector) {
+        apply_service(
+            /* Service: */
+            service_vulnerability->get_service(),
+
+            /* Behavior: */
+            service_vulnerability->get_service_behavior()
+        );
+    }
+
+    // Group:
+    for (Group* group_vulnerability: group_vulnerability_vector) {
+        apply_group(
+            /* User: */
+            group_vulnerability->get_user(),
+
+            /* Group: */
+            group_vulnerability->get_group(),
+
+            /* Behavior: */
+            group_vulnerability->get_group_behavior()
+        );
+    }
+
+    // User:
+    for (User* user_vulnerability: user_vulnerability_vector) {
+        apply_user(
+            /* User: */
+			user_vulnerability->get_user(),
+
+			/* Behavior: */
+			user_vulnerability->get_user_behavior()
+        );
     }
 }
 
@@ -404,7 +432,9 @@ void Applicator::configure_image(const std::string &main_user) {
         } else {
             std::cout << "[+] Configured autologin in LightDM for user " + main_user + "!" << std::endl;
         }
-    } else if (file_exists("/etc/gdm3") == true) {
+    }
+    
+    if (file_exists("/etc/gdm3") == true) {
         // Variables (Assignment):
         // Command:
         std::string command = "echo -e \"AutomaticLoginEnable=True\\nAutomaticLogin=" + main_user + "\" >> /etc/gdm3/daemon.conf";

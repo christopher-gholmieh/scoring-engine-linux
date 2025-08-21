@@ -1,0 +1,48 @@
+# Image:
+image:
+    # Title: 
+    title: "Sample Configuration #01"
+
+    # User:
+    user: "christopherg"
+
+# Vulnerabilities:
+vulnerabilities:
+    # Forensics:
+    - vulnerability:
+        # Type:
+        type: "Forensics"
+
+        # Question:
+        question: "What is the EUID of root?"
+
+        # Answer:
+        answer: "0"
+
+        # Path:
+        path: "/home/christopherg/Desktop/Forensics-1.txt"
+
+        # Points:
+        points: 10
+
+        # Number:
+        number: "1"
+
+    - vulnerability:
+        # Type:
+        type: "Forensics"
+
+        # Question:
+        question: "What is the GID of christopherg?"
+
+        # Answer:
+        answer: "1000"
+
+        # Path:
+        path: "/home/christopherg/Desktop/Forensics-2.txt"
+
+        # Points:
+        points: 10
+
+        # Number:
+        number: "2"

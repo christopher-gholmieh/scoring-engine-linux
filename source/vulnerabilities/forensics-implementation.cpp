@@ -22,17 +22,31 @@ void Forensics::evaluate() {
 
     // Logic:
     if (this->penalized == false && exists == false) {
+        // Remediation:
         this->remediated = false;
+
+        // Penalty:
         this->penalized = true;
 
+        // Logic:
         return;
     }
 
     if (this->penalized == true && exists == true) {
+        // Penalty:
         this->penalized = false;
 
+        // Logic:
         return;
     }
 
-    this->remediated = file_contains(this->path, "ANSWER: " + this->answer);
+    // Variables (Assignment):
+    // Contains:
+    bool contains = file_contains(this->path, "ANSWER: " + this->answer);
+
+    // Logic:
+    if (contains && !this->remediated) {
+        // Remediation:
+        this->remediated = true;
+    }
 }

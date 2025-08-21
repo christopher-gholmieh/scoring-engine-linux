@@ -150,7 +150,7 @@ static void clean_image() {
     };
 
     // Logic:
-    for (const std::string &clean_command : clean_commands) {
+    for (const std::string &clean_command: clean_commands) {
         if (system(clean_command.c_str()) != 0) {
             std::cout << "[!] Command failed: " + clean_command + "!" << std::endl;
         }
