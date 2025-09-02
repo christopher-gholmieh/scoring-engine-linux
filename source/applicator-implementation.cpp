@@ -260,6 +260,12 @@ static void apply_permission(const std::string &path, const std::string &permiss
 
 static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vector) {
     // Variables (Assignment):
+    // Permissions:
+    std::vector<Permission*> permission_vulnerability_vector;
+
+    // Package:
+    std::vector<Package*> package_vulnerability_vector;
+
     // Service:
     std::vector<Service*> service_vulnerability_vector;
 
@@ -282,13 +288,7 @@ static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vecto
                 forensics_vulnerability->get_question()
             );
         } else if (auto package_vulnerability = dynamic_cast<Package*>(vulnerability.get())) {
-            apply_package(
-                /* Package: */
-                package_vulnerability->get_package(),
-
-                /* Behavior: */
-                package_vulnerability->get_package_behavior()
-            );
+            package_vulnerability_vector.push_back(package_vulnerability);
         } else if (auto service_vulnerability = dynamic_cast<Service*>(vulnerability.get())) {
             service_vulnerability_vector.push_back(service_vulnerability);
         } else if (auto group_vulnerability = dynamic_cast<Group*>(vulnerability.get())) {
@@ -302,13 +302,7 @@ static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vecto
             // Log:
             std::cout << "[!] Currently there is no support for configuration vulnerabilities in the applicator! Please configure them yourself!" << std::endl;
         } else if (auto permission_vulnerability = dynamic_cast<Permission*>(vulnerability.get())) {
-			apply_permission(
-				/* Path: */
-				permission_vulnerability->get_path(),
-
-				/* Permissions: */
-				permission_vulnerability->get_permissions()
-			);
+            permission_vulnerability_vector.push_back(permission_vulnerability);
 		} else if (auto file_vulnerability = dynamic_cast<File*>(vulnerability.get())) {
 			// Compiler:
             (void) file_vulnerability;
@@ -318,6 +312,17 @@ static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vecto
 		}
     }
 
+
+    // Package:
+    for (Package* package_vulnerability: package_vulnerability_vector) {
+        apply_package(
+            /* Package: */
+            package_vulnerability->get_package(),
+
+            /* Behavior: */
+            package_vulnerability->get_package_behavior()
+        );
+    }
     
     // Service:
     for (Service* service_vulnerability: service_vulnerability_vector) {
@@ -352,6 +357,17 @@ static void applicator_logic(std::vector<std::unique_ptr<Vulnerability>> &&vecto
 
 			/* Behavior: */
 			user_vulnerability->get_user_behavior()
+        );
+    }
+
+    // Permission:
+    for (Permission* permission_vulnerability: permission_vulnerability_vector) {
+        apply_permission(
+            /* Path: */
+            permission_vulnerability->get_path(),
+
+            /* Permissions: */
+            permission_vulnerability->get_permissions()
         );
     }
 }
