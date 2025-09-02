@@ -11,16 +11,7 @@
 
 // Functions:
 static bool user_exists(const std::string &name) {
-    // Variables (Assignment):
-    // Entry:
-    struct passwd* entry = getpwnam(name.c_str());
-
-    // Logic:
-    if (entry == nullptr) {
-        return false;
-    }
-
-    return true;
+    return getpwnam(name.c_str()) != nullptr;
 }
 
 
@@ -63,5 +54,4 @@ void User::evaluate() {
             break;
         }
     }
-
 }

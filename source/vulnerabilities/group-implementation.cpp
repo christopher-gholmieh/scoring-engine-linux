@@ -13,15 +13,7 @@
 
 // Functions:
 static bool group_exists(const std::string &group) {
-    // Variables (Assignment):
-    // Entry:
-    const struct group* group_entry = getgrnam(group.c_str());
-
-    if (group_entry == nullptr) {
-        return false;
-    }
-
-    return true;
+    return getgrnam(group.c_str()) != nullptr;
 }
 
 static bool user_in_group(const std::string &name, const std::string &group) {

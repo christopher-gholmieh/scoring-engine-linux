@@ -68,11 +68,14 @@ void Scoreboard::enable() {
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
 
     if (server_socket == -1) {
-        // Message:
-        std::cout << "[!] Unable to initialize server socket!" << std::endl;
+        throw std::runtime_error("[!] Unable to initialize server socket!");
+    }
 
-        // Logic:
-        return;
+    // Option:
+    int socket_option = 1;
+
+    if (setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &socket_option, sizeof(socket_option)) != 0) {
+        throw std::runtime_error("[!] Unable to set socket option to socket!");
     }
 
     // Address:
