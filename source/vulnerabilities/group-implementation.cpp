@@ -75,12 +75,7 @@ void Group::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (in_group == true && this->remediated == true) {
+            } else if (in_group == true && this->remediated == true) {
                 this->remediated = false;
 
                 // Notification:
@@ -99,12 +94,7 @@ void Group::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (in_group == false && this->remediated == true) {
+            } else if (in_group == false && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 

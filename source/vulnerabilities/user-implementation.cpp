@@ -38,12 +38,7 @@ void User::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (exists == true && this->remediated == true) {
+            } else if (exists == true && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 
@@ -63,12 +58,7 @@ void User::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (exists == false && this->remediated == true) {
+            } else if (exists == false && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 

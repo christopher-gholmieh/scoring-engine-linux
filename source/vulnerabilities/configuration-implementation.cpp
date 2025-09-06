@@ -33,12 +33,7 @@ void Configuration::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (contains == true && this->remediated == true) {
+            } else if (contains == true && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 
@@ -58,12 +53,7 @@ void Configuration::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (contains == false && this->remediated == true) {
+            } else if (contains == false && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 

@@ -31,12 +31,7 @@ void File::evaluate() {
 		// Notification:
 		construct_positive_notification();
 		play_gain_sound();
-
-		// Logic:
-		return;
-	}
-
-	if (exists == true && this->remediated == true) {
+	} else if (exists == true && this->remediated == true) {
 		// Remediation:
 		this->remediated = false;
 

@@ -72,12 +72,7 @@ void Service::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (enabled == true && this->remediated == true) {
+            } else if (enabled == true && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 
@@ -97,12 +92,7 @@ void Service::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (enabled == false && this->remediated == true) {
+            } else if (enabled == false && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 

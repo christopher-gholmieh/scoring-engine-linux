@@ -62,5 +62,12 @@ void Forensics::evaluate() {
 		// Notification:
 		construct_positive_notification();
         play_gain_sound();
+    } else if (!contains && this->remediated) {
+        // Remediation:
+        this->remediated = false;
+
+        // Notification:
+        construct_negative_notification();
+        play_alarm_sound();
     }
 }

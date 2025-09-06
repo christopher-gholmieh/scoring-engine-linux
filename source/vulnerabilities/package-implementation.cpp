@@ -98,12 +98,7 @@ void Package::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (package_installed == false && this->remediated == true) {
+            } else if (package_installed == false && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 
@@ -123,12 +118,7 @@ void Package::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (package_installed == true && this->remediated == true) {
+            } else if (package_installed == true && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 
@@ -162,12 +152,7 @@ void Package::evaluate() {
                 // Notification:
                 construct_positive_notification();
                 play_gain_sound();
-
-                // Logic:
-                break;
-            }
-
-            if (updated == false && this->remediated == true) {
+            } else if (updated == false && this->remediated == true) {
                 // Remediation:
                 this->remediated = false;
 

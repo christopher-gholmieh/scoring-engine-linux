@@ -42,12 +42,7 @@ void Permission::evaluate() {
         // Notification:
         construct_positive_notification();
         play_gain_sound();
-
-        // Logic:
-        return;
-    }
-
-    if (match == true && this->remediated == true) {
+    } else if (match == true && this->remediated == true) {
         // Remediation:
         this->remediated = false;
 
