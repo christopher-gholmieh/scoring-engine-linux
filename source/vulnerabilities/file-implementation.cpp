@@ -8,6 +8,7 @@
 // Utilities:
 #include "notification-utilities.hpp"
 #include "filesystem-utilities.hpp"
+#include "sound-utilities.hpp"
 
 // Core:
 #include <string>
@@ -29,6 +30,7 @@ void File::evaluate() {
 
 		// Notification:
 		construct_positive_notification();
+		play_gain_sound();
 
 		// Logic:
 		return;
@@ -39,6 +41,7 @@ void File::evaluate() {
 		this->remediated = false;
 
 		// Notification:
-		construct_positive_notification();
+		construct_negative_notification();
+		play_alarm_sound();
 	}
 }

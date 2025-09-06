@@ -8,12 +8,12 @@
 #include "scoreboard-implementation.hpp"
 
 // Core:
+#include <iostream>
+
 #include <memory>
 #include <vector>
 #include <chrono>
 #include <thread>
-
-#include <iostream>
 
 
 // Implementations:
@@ -50,7 +50,7 @@ void Engine::activate() {
         int penalty_points = 0;
         int points = 0;
 
-        for (const std::unique_ptr<Vulnerability>& vulnerability: this->vulnerability_vector) {
+        for (const std::unique_ptr<Vulnerability> &vulnerability: this->vulnerability_vector) {
             // Evaluate:
             vulnerability->evaluate();
 
@@ -64,7 +64,7 @@ void Engine::activate() {
             }
         }
 
-        for (const std::unique_ptr<Vulnerability>& penalty: this->penalty_vector) {
+        for (const std::unique_ptr<Vulnerability> &penalty: this->penalty_vector) {
             // Evaluate:
             penalty->evaluate();
 

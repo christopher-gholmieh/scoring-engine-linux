@@ -7,6 +7,7 @@
 // Utilities:
 #include "notification-utilities.hpp"
 #include "filesystem-utilities.hpp"
+#include "sound-utilities.hpp"
 
 // Core:
 #include <string>
@@ -28,6 +29,7 @@ void Forensics::evaluate() {
 
 		// Notification:
 		construct_negative_notification();
+        play_alarm_sound();
 
         // Penalty:
         this->penalized = true;
@@ -42,6 +44,7 @@ void Forensics::evaluate() {
 
 		// Notification:
 		construct_positive_notification();
+        play_gain_sound();
 
         // Logic:
         return;
@@ -58,5 +61,6 @@ void Forensics::evaluate() {
 
 		// Notification:
 		construct_positive_notification();
+        play_gain_sound();
     }
 }

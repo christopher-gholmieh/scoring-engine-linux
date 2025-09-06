@@ -8,6 +8,7 @@
 // Utilities:
 #include "notification-utilities.hpp"
 #include "filesystem-utilities.hpp"
+#include "sound-utilities.hpp"
 
 // Core:
 #include <iostream>
@@ -40,6 +41,7 @@ void Permission::evaluate() {
 
         // Notification:
         construct_positive_notification();
+        play_gain_sound();
 
         // Logic:
         return;
@@ -51,5 +53,6 @@ void Permission::evaluate() {
 
         // Notification:
         construct_negative_notification();
+        play_alarm_sound();
     }
 }

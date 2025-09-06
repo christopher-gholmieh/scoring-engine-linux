@@ -7,6 +7,7 @@
 
 // Utilities:
 #include "notification-utilities.hpp"
+#include "sound-utilities.hpp"
 
 // Core:
 #include <cstdio>
@@ -96,6 +97,7 @@ void Package::evaluate() {
 
                 // Notification:
                 construct_positive_notification();
+                play_gain_sound();
 
                 // Logic:
                 break;
@@ -107,6 +109,7 @@ void Package::evaluate() {
 
                 // Notification:
                 construct_negative_notification();
+                play_alarm_sound();
             }
 
             break;
@@ -119,6 +122,7 @@ void Package::evaluate() {
 
                 // Notification:
                 construct_positive_notification();
+                play_gain_sound();
 
                 // Logic:
                 break;
@@ -130,6 +134,7 @@ void Package::evaluate() {
 
                 // Notification:
                 construct_negative_notification();
+                play_alarm_sound();
             }
 
             break;
@@ -156,6 +161,7 @@ void Package::evaluate() {
 
                 // Notification:
                 construct_positive_notification();
+                play_gain_sound();
 
                 // Logic:
                 break;
@@ -167,6 +173,7 @@ void Package::evaluate() {
 
                 // Notification:
                 construct_negative_notification();
+                play_alarm_sound();
             }
 
             break;

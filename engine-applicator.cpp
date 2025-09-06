@@ -57,6 +57,7 @@ static void prepare_image(const std::string &main_user) {
         "mv ./README.html /opt/scoring-engine/README.html",
         "chmod 444 /opt/scoring-engine/README.html",
         "cp ./assets/background.png /opt/scoring-engine/assets/",
+        "cp ./assets/*.wav /opt/scoring-engine/assets/",
         "cp -r ./website/ /opt/scoring-engine/",
         "chown -R root:root /opt/scoring-engine/",
         "snap remove firefox",

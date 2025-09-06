@@ -6,6 +6,7 @@
 
 // Utilities:
 #include "notification-utilities.hpp"
+#include "sound-utilities.hpp"
 
 // Core:
 #include <string>
@@ -36,6 +37,7 @@ void User::evaluate() {
 
                 // Notification:
                 construct_positive_notification();
+                play_gain_sound();
 
                 // Logic:
                 break;
@@ -47,6 +49,7 @@ void User::evaluate() {
 
                 // Notification:
                 construct_negative_notification();
+                play_alarm_sound();
             }
 
             break;
@@ -59,6 +62,7 @@ void User::evaluate() {
 
                 // Notification:
                 construct_positive_notification();
+                play_gain_sound();
 
                 // Logic:
                 break;
@@ -70,6 +74,7 @@ void User::evaluate() {
 
                 // Notification:
                 construct_negative_notification();
+                play_alarm_sound();
             }
 
             break;

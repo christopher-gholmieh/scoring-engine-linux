@@ -7,6 +7,7 @@
 
 // Utilities:
 #include "notification-utilities.hpp"
+#include "sound-utilities.hpp"
 
 // Core:
 #include <string>
@@ -73,6 +74,7 @@ void Group::evaluate() {
 
                 // Notification:
                 construct_positive_notification();
+                play_gain_sound();
 
                 // Logic:
                 break;
@@ -83,6 +85,7 @@ void Group::evaluate() {
 
                 // Notification:
                 construct_negative_notification();
+                play_alarm_sound();
             }
 
             break;
@@ -94,7 +97,8 @@ void Group::evaluate() {
                 this->remediated = true;
 
                 // Notification:
-                construct_negative_notification();
+                construct_positive_notification();
+                play_gain_sound();
 
                 // Logic:
                 break;
@@ -106,6 +110,7 @@ void Group::evaluate() {
 
                 // Notification:
                 construct_negative_notification();
+                play_alarm_sound();
             }
 
             break;
