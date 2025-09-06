@@ -16,6 +16,7 @@ static inline bool file_exists(const std::string &path);
 
 static inline std::string file_permission(const std::string &path);
 
+
 // Implementations:
 static inline bool file_contains(const std::string &path, const std::string &target) {
     // Variables (Assignment):

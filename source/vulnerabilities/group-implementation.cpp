@@ -5,6 +5,9 @@
 #include "vulnerabilities/group-implementation.hpp"
 #include "vulnerability-implementation.hpp"
 
+// Utilities:
+#include "notification-utilities.hpp"
+
 // Core:
 #include <string>
 #include <pwd.h>
@@ -65,13 +68,21 @@ void Group::evaluate() {
     switch (this->group_behavior) {
         case USER_IN_GROUP_NOT: {
             if (in_group == false && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (in_group == true && this->remediated == true) {
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;
@@ -79,13 +90,22 @@ void Group::evaluate() {
 
         case USER_IN_GROUP: {
             if (in_group == true && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_negative_notification();
+
+                // Logic:
                 break;
             }
 
             if (in_group == false && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;

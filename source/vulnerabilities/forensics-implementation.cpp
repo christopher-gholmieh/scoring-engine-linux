@@ -5,6 +5,7 @@
 #include "vulnerabilities/forensics-implementation.hpp"
 
 // Utilities:
+#include "notification-utilities.hpp"
 #include "filesystem-utilities.hpp"
 
 // Core:
@@ -25,6 +26,9 @@ void Forensics::evaluate() {
         // Remediation:
         this->remediated = false;
 
+		// Notification:
+		construct_negative_notification();
+
         // Penalty:
         this->penalized = true;
 
@@ -35,6 +39,9 @@ void Forensics::evaluate() {
     if (this->penalized == true && exists == true) {
         // Penalty:
         this->penalized = false;
+
+		// Notification:
+		construct_positive_notification();
 
         // Logic:
         return;
@@ -48,5 +55,8 @@ void Forensics::evaluate() {
     if (contains && !this->remediated) {
         // Remediation:
         this->remediated = true;
+
+		// Notification:
+		construct_positive_notification();
     }
 }

@@ -566,7 +566,7 @@ std::string obtain_main_user(const std::string &plaintext) {
 
     // Logic:
     if (!root["image"]) {
-        throw std::runtime_error("[!] No main user found! Please define a main user!");
+        throw std::runtime_error("[!] No image configuration found! Please define the image's user!");
     }
 
     // Image:

@@ -5,6 +5,8 @@
 #include "vulnerabilities/file-implementation.hpp"
 #include "vulnerability-implementation.hpp"
 
+// Utilities:
+#include "notification-utilities.hpp"
 #include "filesystem-utilities.hpp"
 
 // Core:
@@ -22,12 +24,21 @@ void File::evaluate() {
 
 	// Logic:
 	if (exists == false && this->remediated == false) {
+		// Remediation:
 		this->remediated = true;
 
+		// Notification:
+		construct_positive_notification();
+
+		// Logic:
 		return;
 	}
 
 	if (exists == true && this->remediated == true) {
+		// Remediation:
 		this->remediated = false;
+
+		// Notification:
+		construct_positive_notification();
 	}
 }

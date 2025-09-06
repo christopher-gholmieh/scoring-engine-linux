@@ -5,6 +5,9 @@
 #include "vulnerabilities/package-implementation.hpp"
 #include "vulnerability-implementation.hpp"
 
+// Utilities:
+#include "notification-utilities.hpp"
+
 // Core:
 #include <cstdio>
 #include <string>
@@ -88,13 +91,22 @@ void Package::evaluate() {
     switch (this->package_behavior) {
         case PACKAGE_INSTALLED: {
             if (package_installed == true && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (package_installed == false && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;
@@ -102,13 +114,22 @@ void Package::evaluate() {
 
         case PACKAGE_REMOVED: {
             if (package_installed == false && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (package_installed == true && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;
@@ -130,13 +151,22 @@ void Package::evaluate() {
 
             // Logic:
             if (updated == true && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (updated == false && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;

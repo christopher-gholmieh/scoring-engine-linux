@@ -5,6 +5,8 @@
 #include "vulnerabilities/configuration-implementation.hpp"
 #include "vulnerability-implementation.hpp"
 
+// Utilities:
+#include "notification-utilities.hpp"
 #include "filesystem-utilities.hpp"
 
 // Core:
@@ -24,13 +26,22 @@ void Configuration::evaluate() {
     switch (this->configuration_behavior) {
         case FILE_CONTAINS_NOT: {
             if (contains == false && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (contains == true && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;
@@ -38,13 +49,22 @@ void Configuration::evaluate() {
 
         case FILE_CONTAINS: {
             if (contains == true && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (contains == false && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;

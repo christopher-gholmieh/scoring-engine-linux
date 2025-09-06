@@ -4,6 +4,9 @@
 // Implementations:
 #include "vulnerabilities/user-implementation.hpp"
 
+// Utilities:
+#include "notification-utilities.hpp"
+
 // Core:
 #include <string>
 #include <pwd.h>
@@ -28,13 +31,22 @@ void User::evaluate() {
     switch (this->user_behavior) {
         case DELETE_USER: {
             if (exists == false && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (exists == true && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;
@@ -42,13 +54,22 @@ void User::evaluate() {
 
         case CREATE_USER: {
             if (exists == true && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (exists == false && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;

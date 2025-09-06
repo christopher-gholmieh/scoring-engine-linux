@@ -5,6 +5,8 @@
 #include "vulnerabilities/permission-implementation.hpp"
 #include "vulnerability-implementation.hpp"
 
+// Utilities:
+#include "notification-utilities.hpp"
 #include "filesystem-utilities.hpp"
 
 // Core:
@@ -33,12 +35,21 @@ void Permission::evaluate() {
 
     // Logic:
     if (match == false && this->remediated == false) {
+        // Remediation:
         this->remediated = true;
 
+        // Notification:
+        construct_positive_notification();
+
+        // Logic:
         return;
     }
 
     if (match == true && this->remediated == true) {
+        // Remediation:
         this->remediated = false;
+
+        // Notification:
+        construct_negative_notification();
     }
 }

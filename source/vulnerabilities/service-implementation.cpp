@@ -4,6 +4,9 @@
 // Implementations:
 #include "vulnerabilities/service-implementation.hpp"
 
+// Utilities:
+#include "notification-utilities.hpp"
+
 // Core:
 #include <iostream>
 #include <string>
@@ -62,13 +65,22 @@ void Service::evaluate() {
     switch (this->service_behavior) {
         case DISABLE_SERVICE: {
             if (enabled == false && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (enabled == true && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;
@@ -76,13 +88,22 @@ void Service::evaluate() {
 
         case ENABLE_SERVICE: {
             if (enabled == true && this->remediated == false) {
+                // Remediation:
                 this->remediated = true;
 
+                // Notification:
+                construct_positive_notification();
+
+                // Logic:
                 break;
             }
 
             if (enabled == false && this->remediated == true) {
+                // Remediation:
                 this->remediated = false;
+
+                // Notification:
+                construct_negative_notification();
             }
 
             break;

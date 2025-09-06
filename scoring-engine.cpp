@@ -7,6 +7,7 @@
 #include "cryptography-constants.hpp"
 
 #include "engine-implementation.hpp"
+#include "image-globals.hpp"
 
 // Core:
 #include <iostream>
@@ -54,6 +55,11 @@ int main(void) {
 
     // Title:
     const std::string image_title = obtain_image_title(plaintext);
+    global_image_title = image_title;
+
+    // User:
+    const std::string image_user = obtain_main_user(plaintext);
+    global_image_user = image_user;
 
     // Engine:
     Engine engine(std::move(vulnerability_vector), std::move(penalty_vector), image_title);
