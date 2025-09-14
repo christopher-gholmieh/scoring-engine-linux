@@ -25,4 +25,4 @@ Please look at the sample **YAML** configurations for information on how to conf
 The **description** field is not mandatory, and one will be automatically created if necessary (except for configuration vulnerabilities).
 
 ## Purpose
-This scoring engine was heavily inspired by aeacus's paradigm, and can be used to make Linux practice images for (WHS CyberPatriots)[https://www.whscyberpatriots.com]!
+This scoring engine was heavily inspired by aeacus's paradigm, and can be used to make Linux practice images for [WHS CyberPatriots](https://www.whscyberpatriots.com)!
