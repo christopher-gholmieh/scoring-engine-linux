@@ -1,40 +1,80 @@
 # Scoring Engine - Linux
-This is a scoring engine meant to replicate the CyberPatriot AFA competition experience. Practice images can easily be customized and created, and most configured vulnerabilities can automatically be applied.
+
+A customizable scoring engine for creating CyberPatriot AFA competition practice images. Automatically applies and scores Linux security vulnerabilities through YAML configuration.
+
+## Quick Start
+
+1. **Create Configuration**
+   ```bash
+   # Use sample configs as templates
+   cp samples/development-configuration-01.yaml my-config.yaml
+   ```
+
+2. **Parse & Build**
+   ```bash
+   python3 configuration-parser.py my-config.yaml
+   make all
+   ```
+
+3. **Apply Configuration**
+   ```bash
+   ./build/engine-applicator
+   chmod +x assets/development/*.desktop  # Make desktop files executable
+   ```
 
 ## Configuration
-To create a configuration, simply create a **YAML** file that is formatted as so:
+
+Define vulnerabilities in YAML format:
+
 ```yaml
-# Image:
 image:
-    # Title: 
-    title: "image-title"
+  title: "Practice Image"
+  user: "student"
 
-    # User:
-    user: "user"
-
-# Vulnerabilities:
 vulnerabilities:
-    - vulnerability:
+  - vulnerability:
+      type: "ServiceEnabled"
+      service: "ufw"
+      points: 10
+      
+  - vulnerability:
+      type: "FileContainsNot"
+      path: "/etc/ssh/sshd_config"
+      text: "PermitRootLogin yes"
+      points: 15
+      description: "SSH root login disabled"
 
-# Penalties:
 penalties:
   - penalty:
+      type: "UserRemoved"
+      user: "admin"
+      points: 5
 ```
 
-Please look at the sample **YAML** configurations for information on how to configure Linux vulnerabilities.
-The **description** field is not mandatory, and one will be automatically created if necessary (except for configuration vulnerabilities).
+## Vulnerability Types
 
-## Instructions
-Create your **YAML** configuration, and then run **configuration-parser.py <path-to-yaml-configuration>**
-* This will automatically put in the encryption bytes into the appropriate files.
+- **Services**: `ServiceEnabled`, `ServiceDisabled`
+- **Users**: `UserCreated`, `UserRemoved`, `UserInGroup`, `UserInGroupNot`
+- **Files**: `FileContains`, `FileContainsNot`, `FileExistsNot`, `PermissionNot`
+- **Packages**: `PackageRemoved`
+- **Forensics**: Custom questions with answers
 
-Then compile the programs by running:
+## Sample Configurations
+
+Check `samples/` for complete examples:
+- `development-configuration-01.yaml` - Basic setup
+- `development-configuration-02.yaml` - Advanced scenarios
+- `forensics-configuration-01.yaml` - Forensics challenges
+
+## Build Options
+
 ```bash
-make all
+make all        # Build both engine and applicator
+make engine     # Build scoring engine only
+make applicator # Build applicator only
+make clean      # Clean build files
 ```
 
-Lastly, apply your configuration by running the applicator in **build/**, and make sure to clean up if necessary.
-* **Also make sure to make the desktop files executable!**
+---
 
-## Purpose
-This scoring engine was heavily inspired by aeacus's paradigm, and can be used to make Linux practice images for [WHS CyberPatriots](https://www.whscyberpatriots.com)!
+*Inspired by aeacus paradigm • Built for [WHS CyberPatriots](https://www.whscyberpatriots.com)*
