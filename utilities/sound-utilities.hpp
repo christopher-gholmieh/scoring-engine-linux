@@ -97,7 +97,7 @@ static inline void* play_alarm_sound_thread(void* argument) {
     (void) argument;
 
     // Command:
-    if (system("aplay ./assets/alarm.wav &") != 0) {
+    if (system("aplay ./assets/alarm.wav") != 0) {
         std::cout << "[!] Error playing alarm sound!" << std::endl;
     }
 
@@ -118,7 +118,7 @@ static inline void* play_gain_sound_thread(void* argument) {
     (void) argument;
 
     // Command:
-    if (system("aplay ./assets/gain.wav &") != 0) {
+    if (system("aplay ./assets/gain.wav") != 0) {
         std::cout << "[!] Error playing gain sound!" << std::endl;
     }
 
@@ -135,14 +135,14 @@ static inline void* play_gain_sound_thread(void* argument) {
 }
 
 static inline void play_alarm_sound(void) {
+    // Variables (Assignment):
+    // Expected:
+    bool expected = false;
+
     // Validation:
-    if (playing_alarm == true) {
-        std::cout << "playing" << std::endl;
+    if (!playing_alarm.compare_exchange_strong(expected, true)) {
         return;
     }
-
-    // State:
-    playing_alarm = true;
 
     // Variables (Assignment):
     // Thread:
@@ -172,14 +172,14 @@ static inline void play_alarm_sound(void) {
 }
 
 static inline void play_gain_sound(void) {
+    // Variables (Assignment):
+    // Expected:
+    bool expected = false;
+
     // Validation:
-    if (playing_gain == true) {
-        std::cout << "playing" << std::endl;
+    if (!playing_gain.compare_exchange_strong(expected, true)) {
         return;
     }
-
-    // State:
-    playing_gain = true;
 
     // Variables (Assignment):
     // Thread:
