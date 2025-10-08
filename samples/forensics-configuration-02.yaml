@@ -1,0 +1,297 @@
+# Written by: Christopher Gholmieh
+# Image:
+image:
+  # Title:
+  title: "Linux Probing"
+
+  # User:
+  user: "prober"
+
+
+# Vulnerabilities:
+vulnerabilities:
+  # Forensics:
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the file that contains hashed passwords located in /etc? Please enter the full path of the file!"
+
+    # Answer:
+    answer: "/etc/shadow"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-1.txt"
+
+    # Number:
+    number: "1"
+
+    # Points:
+    points: 5
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the file that contains user records in /etc? Please enter the full path of the file!"
+
+    # Answer:
+    answer: "/etc/passwd"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-2.txt"
+
+    # Number:
+    number: "2"
+
+    # Points:
+    points: 5
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the unique machine id for this Linux system?"
+
+    # Answer:
+    answer: "TODO: Do this!"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-3.txt"
+
+    # Number:
+    number: "3"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the name of the bootloader on this Linux system (all lowercase)?"
+
+    # Answer:
+    answer: "grub"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-4.txt"
+
+    # Number:
+    number: "4"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the name of the user with the EUID of 0 (all lowercase)?"
+
+    # Answer:
+    answer: "root"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-5.txt"
+
+    # Number:
+    number: "5"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the UID of the user prober?"
+
+    # Answer:
+    answer: "1000"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-6.txt"
+
+    # Number:
+    number: "6"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the name of the user that should not be on this system?"
+
+    # Answer:
+    answer: "gwashington"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-7.txt"
+
+    # Number:
+    number: "7"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the permission (in octal format, e.g 777) of /etc/passwd?"
+
+    # Answer:
+    answer: "777"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-8.txt"
+
+    # Number:
+    number: "8"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the name of the malicious package located on this system?"
+
+    # Answer:
+    answer: "john"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-9.txt"
+
+    # Number:
+    number: "9"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the full path of the plaintext password file located on this system?"
+
+    # Answer:
+    answer: "/etc/firewall.txt"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-10.txt"
+
+    # Number:
+    number: "10"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the hostname of this system?"
+
+    # Answer:
+    answer: "WHSCyberPatriots"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-11.txt"
+
+    # Number:
+    number: "11"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the full path of the malicious script being ran through crontabs?"
+
+    # Answer:
+    answer: "/usr/share/malicious_backdoor.py"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-12.txt"
+
+    # Number:
+    number: "12"
+
+    # Points:
+    points: 5 
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the full path of the mp4 file hidden on this system?"
+
+    # Answer:
+    answer: "/home/jmuskington/Music/my_favorite_song.mp4"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-13.txt"
+
+    # Number:
+    number: "13"
+
+    # Points:
+    points: 5
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "Who is the owner of the file /etc/hickory?"
+
+    # Answer:
+    answer: "/home/jmuskington/Music/my_favorite_song.mp4"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-14.txt"
+
+    # Number:
+    number: "14"
+
+    # Points:
+    points: 5
+
+  - vulnerability:
+    # Type:
+    type: "Forensics"
+
+    # Question:
+    question: "What is the name of the vulnerable service running through systemd?"
+
+    # Answer:
+    answer: "nginx"
+
+    # Path:
+    path: "/home/prober/Desktop/Forensics-Question-15.txt"
+
+    # Number:
+    number: "15"
+
+    # Points:
+    points: 5
